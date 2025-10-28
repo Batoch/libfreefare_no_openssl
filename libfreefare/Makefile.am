@@ -1,4 +1,4 @@
-AM_CFLAGS = @LIBNFC_CFLAGS@
+AM_CFLAGS = @LIBNFC_CFLAGS@ -I$(top_srcdir)/libfreefare/openssl_compat/Inc
 AM_LDFLAGS = @LIBNFC_LIBS@
 
 lib_LTLIBRARIES = libfreefare.la
@@ -17,7 +17,10 @@ libfreefare_la_SOURCES = felica.c \
 			 mifare_application.c \
 			 ntag21x.c \
 			 ntag21x_error.c \
-			 tlv.c
+			 tlv.c \
+			 openssl_compat/Src/simple_aes.c \
+			 openssl_compat/Src/simple_des.c \
+			 openssl_compat/Src/simple_rand.c
 libfreefare_la_LIBADD =
 
 if WITH_DEBUG

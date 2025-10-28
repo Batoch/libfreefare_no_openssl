@@ -16,9 +16,12 @@ set(LIBRARY_SOURCES
 		ntag21x_error
 		tlv
 		../contrib/libutil/hexdump
+		openssl_compat/Src/simple_aes
+		openssl_compat/Src/simple_des
+		openssl_compat/Src/simple_rand
 		)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/openssl_compat/Inc)
 
 add_library(freefare SHARED ${LIBRARY_SOURCES})
 target_link_libraries(freefare ${LIBS})

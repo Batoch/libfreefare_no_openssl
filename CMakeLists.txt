@@ -16,7 +16,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mo
 add_definitions("-std=c99")
 
 find_package(LIBNFC REQUIRED)
-find_package(OpenSSL REQUIRED)
+## Removed external OpenSSL dependency; using internal minimal compatibility layer in libfreefare/openssl_compat
 
 IF(WIN32)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/config_windows.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/include/config.h)
@@ -47,8 +47,12 @@ endif(MINGW)
 message("CMAKE_C_FLAGS: " ${CMAKE_C_FLAGS})
 message("CMAKE_SHARED_LINKER_FLAGS: " ${CMAKE_SHARED_LINKER_FLAGS})
 
-include_directories(${LIBNFC_INCLUDE_DIRS} ${OPENSSL_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/contrib/libutil)
-set(LIBS ${LIBS} ${LIBNFC_LIBRARIES} ${OPENSSL_LIBRARIES})
+include_directories(${LIBNFC_INCLUDE_DIRS} 
+                    ${CMAKE_CURRENT_SOURCE_DIR} 
+                    ${CMAKE_CURRENT_SOURCE_DIR}/contrib/libutil 
+                    ${CMAKE_CURRENT_SOURCE_DIR}/libfreefare/openssl_compat 
+                    ${CMAKE_CURRENT_SOURCE_DIR}/libfreefare/openssl_compat/Inc)
+set(LIBS ${LIBS} ${LIBNFC_LIBRARIES})
 
 option(WITH_DEBUG "Extra debug information is outputted when this is turned on" OFF)
 

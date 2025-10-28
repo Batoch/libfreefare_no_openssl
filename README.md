@@ -46,9 +46,9 @@ First, ensure all dependencies are installed:
 * [libnfc](https://github.com/nfc-tools/libnfc);
 * git;
 * Autotools (autoconf, automake, libtool);
-* OpenSSL development package.
+* (Optional) OpenSSL development package. (This fork can build without external OpenSSL; it uses a minimal internal AES/DES/RAND implementation found under `libfreefare/openssl_compat`.)
 ```
-apt-get install autoconf automake git libtool libssl-dev pkg-config
+apt-get install autoconf automake git libtool pkg-config
 ```
 
 Clone this repository:

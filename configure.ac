@@ -10,7 +10,7 @@ LT_INIT
 
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE(foreign dist-bzip2 no-dist-gzip)
+AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip subdir-objects])
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
@@ -53,9 +53,8 @@ AC_DEFINE([_BSD_SOURCE], [1], [Define on BSD to activate all library features])
 
 CFLAGS="$CFLAGS -std=c99"
 
-# Crypto functions for MIFARE DesFire support are provided by OpenSSL.
-AC_CHECK_LIB([crypto], [DES_ecb_encrypt], [], [AC_MSG_ERROR([Cannot find libcrypto.])])
-AC_CHECK_HEADERS([openssl/aes.h openssl/des.h openssl/rand.h], [], [AC_MSG_ERROR([Cannot find openssl headers.])])
+# Crypto functions for MIFARE DesFire support now provided by internal minimal implementation.
+AC_MSG_NOTICE([Using internal minimal AES/DES/RAND implementation (no external OpenSSL dependency).])
 
 # Checks for pkg-config modules.
 LIBNFC_REQUIRED_VERSION="1.7.0"
